@@ -6,12 +6,15 @@
             <input [class.is-invalid]="registration.get('Name')?.invalid  && registration.get('Name')?.touched"
                 [class.is-valid]="registration.get('Name')?.valid  && registration.get('Name')?.touched"
                 formControlName='Name' type="text" class="form-control">
-            <!-- <small [class.d-none]= "registrationForm.get('username')?.valid  || registrationForm.get('username')?.untouched" class="text-danger"> Username is required</small> -->
+            <!-- <small [class.d-none]= "registration.get('username')?.valid  || registration.get('username')?.untouched" class="text-danger"> Username is required</small> -->
 
             <div *ngIf="registration.get('Name')?.errors?.['required'] && registration.get('Name')?.touched"
                 class="text-danger">Name is required</div>
             <div *ngIf="registration.get('Name')?.errors?.['minlength'] && registration.get('Name')?.touched"
-                class="text-danger">Name should atleast be 3 characters</div>
+                class="text-danger">Name should atleast be 10 characters</div>
+            <div *ngIf="registration.get('Name')?.errors?.['NameNotAllowed']  && registration.get('Name')?.touched"
+                class="text-danger" class="text-danger"> {{registration.get('Name')?.errors?.['NameNotAllowed']}}</div>
+            <label>Class</label>
         </div>
         <label>SurName</label>
         <input [class.is-invalid]="registration.get('SurName')?.invalid  && registration.get('SurName')?.touched"
@@ -22,10 +25,10 @@
         <div *ngIf="registration.get('SurName')?.errors?.['required'] && registration.get('SurName')?.touched"
             class="text-danger">SurName is required</div>
         <div *ngIf="registration.get('SurName')?.errors?.['minlength'] && registration.get('SurName')?.touched"
-            class="text-danger">SurName should atleast be 3 characters</div>
+            class="text-danger">SurName should atleast be 10 characters</div>
         <label>Class</label>
 
-        <select class="form-select" formControlName="class" aria-label="Default select example">
+        <select class="form-select" formControlName="class" >
             <option selected> select Class</option>
             <option value="1">One</option>
             <option value="2">Two</option>
@@ -46,9 +49,10 @@
         <!-- <small [class.d-none]= "registration.get('username')?.valid  || registration.get('username')?.untouched" class="text-danger"> Username is required</small> -->
 
         <div *ngIf="registration.get('FathersName')?.errors?.['required'] && registration.get('FathersName')?.touched"
-            class="text-danger">Fathers'name is required</div>
+            class="text-danger">FathersName is required</div>
         <div *ngIf="registration.get('FathersName')?.errors?.['minlength'] && registration.get('FathersName')?.touched"
-            class="text-danger">Name should atleast be 3 characters</div>
+            class="text-danger">Name should atleast be 10 characters</div>
+
 
         <label>Mothers Name</label>
         <input
@@ -60,13 +64,19 @@
         <div *ngIf="registration.get('MothersName')?.errors?.['minlength'] && registration.get('MothersName')?.touched"
             class="text-danger">Name should atleast be 3 characters</div>
 
-        <label>Address</label>
-        <div formGroupName="address">
+        <label>Address:</label> 
+         <div class="input-group mb-3  w-50 d-flex ">
+            <div class="input-group-text">
+              <input type="checkbox">
+            </div>
+            <input type="text" class="form-control" placeholder="Have Multiple Address" w-50>
+          </div>
+
+        <div>
             <div class="form-group d-flex w-100">
                 <div class="w-50">
                     <label>Street Name</label>
                     <input
-                        [class.is-invalid]="registration.get('streetName')?.invalid  && registration.get('streetName')?.touched"
                         [class.is-valid]="registration.get('streetName')?.valid  && registration.get('streetName')?.touched"
                         formControlName='streetName' type="text" class="form-control">
                     <div *ngIf="registration.get('streetName')?.errors?.['required'] && registration.get('streetName')?.touched"
@@ -74,30 +84,68 @@
                 </div>
                 <div class="w-50 mx-2">
                     <label>Land Mark</label>
-                    <div *ngIf="registration.get('Landmark')?.errors?.['minlength'] && registration.get('Landmark')?.touched"
-                        class="text-danger">Name should atleast be 3 characters</div>
-                    <input formControlName='Landmark' type="text" class="form-control">
+                    <input
+                        [class.is-valid]="registration.get('Landmark')?.valid  && registration.get('Landmark')?.touched"
+                        formControlName='Landmark' type="text" class="form-control">
+
+                    <div *ngIf="registration.get('Landmark')?.errors?.['required'] && registration.get('Landmark')?.touched"
+                        class="text-danger">Landmark is required</div>
+
                 </div>
             </div>
-
             <label>Address1</label>
+           
+            <input [class.is-valid]="registration.get('Address1')?.valid  && registration.get('Address1')?.touched"
+                formControlName='Address1' type="text" class="form-control">
             <div *ngIf="registration.get('Address1')?.errors?.['minlength'] && registration.get('Address1')?.touched"
                 class="text-danger">Address</div>
             <div *ngIf="registration.get('Address1')?.errors?.['required'] && registration.get('Address1')?.touched"
                 class="text-danger">Address1 is required</div>
-            <input formControlName='Address1' type="text" class="form-control">
-
+               
             <label>Address2</label>
-            <div *ngIf="registration.get('Address2')?.errors?.['minlength'] && registration.get('Address2')?.touched"
-                class="text-danger">Name should atleast be 3 characters</div>
-            <input formControlName='Address2' type="text" class="form-control">
-        </div>
-        <label>Phone Number</label>
-        <input formControlName='phoneNumber' type="number" class="form-control">
+            
+            <input
+                [class.is-invalid]="registration.get('FathersName')?.invalid  && registration.get('FathersName')?.touched"
+                [class.is-valid]="registration.get('Address2')?.valid  && registration.get('Address2')?.touched"
+                formControlName='Address2' type="text" class="form-control">
 
-        <button class="btn btn-primary" [disabled]="!registration.valid" type="submit">Register</button>
-        
+            <div *ngIf="registration.get('Address2')?.errors?.['minlength'] && registration.get('Address2')?.touched"
+                class="text-danger">Address</div>
+            <div *ngIf="registration.get('Address2')?.errors?.['required'] && registration.get('Address2')?.touched"
+                class="text-danger">Address2 is required</div>
+        </div>
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input
+                [class.is-valid]="registration.get('phoneNumber')?.valid  && registration.get('phoneNumber')?.touched"
+                pattern="^\d{10}$" formControlName='phoneNumber' type="number" class="form-control">
+
+            <!-- <div *ngIf="registration.get('phoneNumber')?.errors?.['minlength'] && registration.get('phoneNumber')?.touched"
+            class="text-danger">number should be 10 digits</div>
+        <div *ngIf="registration.get('phoneNumber')?.errors?.['required'] && registration.get('phoneNumber')?.touched"
+            class="text-danger">phoneNumber is required</div> -->
+            <p class="text-danger "
+                *ngIf="registration.controls['phoneNumber'].invalid &&registration.controls['phoneNumber'].touched ">
+                Please
+                Enter 10 digit number </p>
+            <p class="text-danger "
+                *ngIf="registration.controls['phoneNumber'].invalid && registration.controls['phoneNumber'].hasError('minlength[10]' )">
+                Please enter a minimum 10 digits</p>
+            <p class="text-danger "
+                *ngIf="registration.controls['phoneNumber'].invalid &&registration.controls['phoneNumber'].hasError('maxlength[11]')">
+                Number should not exceed 10 Digits</p>
+        </div>
+        <!-- <div class="text-danger " *ngIf="registration.controls['phoneNumber'].invalid && registration.controls['phoneNumber'].hasError('pattern')
+           ">Only Numbers</div> -->
+        <!-- <label>Email Id</label>
+        <input   [class.is-valid]="registration.get('email')?.valid  && registration.get('email')?.touched"formControlName='email' class="form-control">
+
+        <div *ngIf="registration.get('email')?.errors?.['minlength'] && registration.get('email')?.touched"
+            class="text-danger"></div>
+        <div *ngIf="registration.get('email')?.errors?.['required'] && registration.get('email')?.touched"
+            class="text-danger">email is required</div> -->
+
+        <button class="btn btn-primary mt-2" [disabled]="registration.invalid" type="submit">Register</button>
     </form>
     {{registration.value | json}}
-
 </div>
